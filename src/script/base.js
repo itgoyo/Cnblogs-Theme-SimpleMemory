@@ -6,47 +6,47 @@
  **/
 function Base() {
 
-    const bndongJs    = this,
-          tools       = new myTools,
-          progressBar = new ToProgress(window.cnblogsConfig.progressBar, '#bottomProgressBar'); // 进度条
-     var  temScroll   = 0,  // 上一次页面滚动位置
+    const bndongJs = this,
+        tools = new myTools,
+        progressBar = new ToProgress(window.cnblogsConfig.progressBar, '#bottomProgressBar'); // 进度条
+    var temScroll = 0, // 上一次页面滚动位置
 
         /** 定时器 **/
-        timeIds    = {
-            setMenuIntroduceTId      : null, // 菜单设置-个人信息定时器ID
-            setMenuCalendarTId       : null, // 菜单设置-日历定时器ID
-            setSidebarSearchTId      : null, // 菜单设置-找找看定时器ID
-            setSidebarScorerankTId   : null, // 菜单设置-积分与排名定时器ID
-            setMenuSidebarTId        : null, // 菜单设置-最新随笔定时器ID
-            setMenuToptagsTId        : null, // 菜单设置-我的标签定时器ID
-            setMenuClassifyTId       : null, // 菜单设置-随笔分类定时器ID
-            setMenuRecordTId         : null, // 菜单设置-随笔档案定时器ID
-            setMenuArticleTId        : null, // 菜单设置-文章档案定时器ID
-            setMenuTopviewTId        : null, // 菜单设置-阅读排行定时器ID
-            setMenuTopDiggPostsTId   : null, // 菜单设置-推荐排行定时器ID
-            setMenuRecentCommentsTId : null, // 菜单设置-最新评论定时器ID
-            setHomeRightMenuTId      : null, // 主页右下角菜单设置定时器ID
-            setNotHomeRightMenuTId   : null, // 非主页右下角菜单设置定时器ID
-            setCnzzTId               : null, // 网站统计Cnzz设置定时器ID
-            setAmazingTId            : null, // 网站统计Amazing设置定时器ID
-            setCatalogTId            : null, // 文章目录设置定时器ID
-            blogPostCategoryTId      : null, // 文章信息分类设置定时器ID
-            entryTagTId              : null, // 文章信息标签设置定时器ID
-            commentTId               : null, // 评论框设置定时器ID
+        timeIds = {
+            setMenuIntroduceTId: null, // 菜单设置-个人信息定时器ID
+            setMenuCalendarTId: null, // 菜单设置-日历定时器ID
+            setSidebarSearchTId: null, // 菜单设置-找找看定时器ID
+            setSidebarScorerankTId: null, // 菜单设置-积分与排名定时器ID
+            setMenuSidebarTId: null, // 菜单设置-最新随笔定时器ID
+            setMenuToptagsTId: null, // 菜单设置-我的标签定时器ID
+            setMenuClassifyTId: null, // 菜单设置-随笔分类定时器ID
+            setMenuRecordTId: null, // 菜单设置-随笔档案定时器ID
+            setMenuArticleTId: null, // 菜单设置-文章档案定时器ID
+            setMenuTopviewTId: null, // 菜单设置-阅读排行定时器ID
+            setMenuTopDiggPostsTId: null, // 菜单设置-推荐排行定时器ID
+            setMenuRecentCommentsTId: null, // 菜单设置-最新评论定时器ID
+            setHomeRightMenuTId: null, // 主页右下角菜单设置定时器ID
+            setNotHomeRightMenuTId: null, // 非主页右下角菜单设置定时器ID
+            setCnzzTId: null, // 网站统计Cnzz设置定时器ID
+            setAmazingTId: null, // 网站统计Amazing设置定时器ID
+            setCatalogTId: null, // 文章目录设置定时器ID
+            blogPostCategoryTId: null, // 文章信息分类设置定时器ID
+            entryTagTId: null, // 文章信息标签设置定时器ID
+            commentTId: null, // 评论框设置定时器ID
         };
 
-//----------------------------------- 初始化 -----------------------------------------//
+    //----------------------------------- 初始化 -----------------------------------------//
 
     /**
      * 初始化
      */
     this.init = function () {
         bndongJs.loadingBeforeInit(); // Loading 前初始化
-        bndongJs.endLoading();        // Loading 结束
-        bndongJs.loadingAfterInit();  // Loading 后初始化
+        bndongJs.endLoading(); // Loading 结束
+        bndongJs.loadingAfterInit(); // Loading 后初始化
     };
 
-//----------------------------- Loading 前后逻辑处理 ----------------------------------//
+    //----------------------------- Loading 前后逻辑处理 ----------------------------------//
 
     /**
      * Loading 前初始化
@@ -60,7 +60,7 @@ function Base() {
         if (window.cnblogsConfig.fontIconExtend !== '') tools.dynamicLoadingCss(window.cnblogsConfig.fontIconExtend);
 
         // 页面初始化
-        ($('#topics').length > 0) ? bndongJs.notHomeInit() : bndongJs.homeInit();
+        ($('#topics').length > 0) ? bndongJs.notHomeInit(): bndongJs.homeInit();
     };
 
     /**
@@ -75,26 +75,34 @@ function Base() {
         if (window.cnblogsConfig.bgAnimationRendered) require(['RibbonsEffect']);
 
         // 更换网站图标
-        let linkObject  = document.createElement('link');
-        linkObject.rel  = "shortcut icon";
+        let linkObject = document.createElement('link');
+        linkObject.rel = "shortcut icon";
         linkObject.href = window.cnblogsConfig.webpageIcon;
         document.getElementsByTagName("head")[0].appendChild(linkObject);
 
         // 滚动监听
-        $(window).scroll( function() { bndongJs.scrollMonitor(); });
+        $(window).scroll(function () {
+            bndongJs.scrollMonitor();
+        });
 
         // 窗口变化监听
-        $(window).resize( function() { bndongJs.resizeMonitor(); });
+        $(window).resize(function () {
+            bndongJs.resizeMonitor();
+        });
 
         // 设置名称
         $('#homeTopTitle').text(window.cnblogsConfig.blogUser);
 
         // 初始化菜单滚动条样式
-        $('#menuWrap').optiscroll({ forceScrollbars: true, maxTrackSize: 20, preventParentScroll: true });
+        $('#menuWrap').optiscroll({
+            forceScrollbars: true,
+            maxTrackSize: 20,
+            preventParentScroll: true
+        });
 
         // 设置菜单个人简介头像
         var blogAvatar = window.cnblogsConfig.blogAvatar ? window.cnblogsConfig.blogAvatar : 'https://gitee.com/dbnuo/Cnblogs-Theme-SimpleMemory/raw/master/img/default_avatar.jpeg';
-        $('#menuBlogAvatar').append("<img src='"+blogAvatar+"'>");
+        $('#menuBlogAvatar').append("<img src='" + blogAvatar + "'>");
 
         // html5-title
         bndongJs.htmlTitle();
@@ -104,22 +112,24 @@ function Base() {
 
         // 设置菜单侧边栏内容
         let setMenuData = bndongJs.setMenuData();
-        timeIds.setMenuIntroduceTId      = window.setInterval( setMenuData.setIntroduce, 1000 );
-        timeIds.setMenuCalendarTId       = window.setInterval( setMenuData.setCalendar, 1000 );
-        timeIds.setSidebarSearchTId      = window.setInterval( setMenuData.setSidebarSearch, 1000 );
-        timeIds.setSidebarScorerankTId   = window.setInterval( setMenuData.setSidebarScorerank, 1000 );
-        timeIds.setMenuSidebarTId        = window.setInterval( setMenuData.setSidebar, 1000 );
-        timeIds.setMenuToptagsTId        = window.setInterval( setMenuData.setToptags, 1000 );
-        timeIds.setMenuClassifyTId       = window.setInterval( setMenuData.setClassify, 1000 );
-        timeIds.setMenuArticleTId        = window.setInterval( setMenuData.setArticle, 1000 );
-        timeIds.setMenuRecordTId         = window.setInterval( setMenuData.setRecord, 1000 );
-        timeIds.setMenuTopviewTId        = window.setInterval( setMenuData.setTopview, 1000 );
-        timeIds.setMenuTopDiggPostsTId   = window.setInterval( setMenuData.setTopDiggPosts, 1000 );
-        timeIds.setMenuRecentCommentsTId = window.setInterval( setMenuData.setRecentComments, 1000 );
+        timeIds.setMenuIntroduceTId = window.setInterval(setMenuData.setIntroduce, 1000);
+        timeIds.setMenuCalendarTId = window.setInterval(setMenuData.setCalendar, 1000);
+        timeIds.setSidebarSearchTId = window.setInterval(setMenuData.setSidebarSearch, 1000);
+        timeIds.setSidebarScorerankTId = window.setInterval(setMenuData.setSidebarScorerank, 1000);
+        timeIds.setMenuSidebarTId = window.setInterval(setMenuData.setSidebar, 1000);
+        timeIds.setMenuToptagsTId = window.setInterval(setMenuData.setToptags, 1000);
+        timeIds.setMenuClassifyTId = window.setInterval(setMenuData.setClassify, 1000);
+        timeIds.setMenuArticleTId = window.setInterval(setMenuData.setArticle, 1000);
+        timeIds.setMenuRecordTId = window.setInterval(setMenuData.setRecord, 1000);
+        timeIds.setMenuTopviewTId = window.setInterval(setMenuData.setTopview, 1000);
+        timeIds.setMenuTopDiggPostsTId = window.setInterval(setMenuData.setTopDiggPosts, 1000);
+        timeIds.setMenuRecentCommentsTId = window.setInterval(setMenuData.setRecentComments, 1000);
         setMenuData.setCustomData();
 
         // 设置菜单展开收缩
-        $('.m-list-title-select').click(function(){ $(this).parents('.m-list-title').next('.m-icon-list').slideToggle(500) });
+        $('.m-list-title-select').click(function () {
+            $(this).parents('.m-list-title').next('.m-icon-list').slideToggle(500)
+        });
 
         // 添加页面特效控制
         bndongJs.setPageAnimationControl();
@@ -128,9 +138,9 @@ function Base() {
         tools.consoleText(window.cnblogsConfig.consoleList, 'banner');
     };
 
-//---------------------------------- 逻辑处理 --------------------------------------//
+    //---------------------------------- 逻辑处理 --------------------------------------//
 
-//=================== 逻辑处理：公共方法
+    //=================== 逻辑处理：公共方法
 
     /**
      * 清除全部定时器
@@ -151,17 +161,17 @@ function Base() {
     /**
      * 滚动处理
      */
-    this.scrollMonitor = function() {
+    this.scrollMonitor = function () {
 
-        var homeScroll     = $('#home').offset().top - 40,
-            docScroll      = $(document).scrollTop(),
-            openButton     = $('#open-button'),
-            sideToolbar    = $('#sideToolbar'),
+        var homeScroll = $('#home').offset().top - 40,
+            docScroll = $(document).scrollTop(),
+            openButton = $('#open-button'),
+            sideToolbar = $('#sideToolbar'),
             sideToolbarTop = $('.main-header').outerHeight(),
-            scrollPercent  = tools.getScrollPercent(),
-            toUpDown       = $("#toUpDown"),
-            toUpDownI      = $("#toUpDownI"),
-            toUpDownSpan   = $('.toUpDownSpan');
+            scrollPercent = tools.getScrollPercent(),
+            toUpDown = $("#toUpDown"),
+            toUpDownI = $("#toUpDownI"),
+            toUpDownSpan = $('.toUpDownSpan');
 
         // 设置滚动条
         progressBar.setProgress(scrollPercent);
@@ -177,11 +187,15 @@ function Base() {
 
         // 设置头部底部按钮
         if (homeScroll <= docScroll) {
-            toUpDownI.rotate({animateTo:0});
+            toUpDownI.rotate({
+                animateTo: 0
+            });
             toUpDown.attr('data', 'up');
             toUpDownSpan.text('返回顶部');
         } else {
-            toUpDownI.rotate({animateTo:-180});
+            toUpDownI.rotate({
+                animateTo: -180
+            });
             toUpDown.attr('data', 'down');
             toUpDownSpan.text('跳至底部');
         }
@@ -215,17 +229,17 @@ function Base() {
     /**
      * 屏幕大小变化处理
      */
-    this.resizeMonitor = function() {
+    this.resizeMonitor = function () {
         var bodyWidth = parseFloat(document.body.clientWidth);
         bndongJs.setDomHomePosition();
 
         // 设置目录插件左右位置
         if ($('#sideToolbar').length > 0) {
             var mainContentWidth = $('#mainContent').outerWidth(true);
-            var listWidth        = $('#sideCatalog').outerWidth(true);
+            var listWidth = $('#sideCatalog').outerWidth(true);
             listWidth = listWidth > 220 ? listWidth : 242;
-            var bothWidth        = (bodyWidth - mainContentWidth) / 2;
-            var rightPx          = bothWidth - listWidth - 50;
+            var bothWidth = (bodyWidth - mainContentWidth) / 2;
+            var rightPx = bothWidth - listWidth - 50;
 
             $('#sideCatalog').css('right', (rightPx > 0 ? rightPx : 0) + 'px');
             // if (bothWidth > listWidth + 50 && bodyWidth > 1230) {
@@ -240,26 +254,32 @@ function Base() {
     /**
      * 右下角菜单事件处理
      */
-    this.rightMenuMous = function(parentObject, subObject) {
+    this.rightMenuMous = function (parentObject, subObject) {
         $(parentObject).on({
-            mouseover : function(){
+            mouseover: function () {
                 var str = '';
 
                 if (subObject === '.rightBuryitSpan') {
                     // 鼠标移入，更新踩值
                     str = $('#bury_count').text();
-                    if ($(subObject).text() !== str) {$(parentObject).attr('clickflg', 'false'); $(subObject).text(str);}
+                    if ($(subObject).text() !== str) {
+                        $(parentObject).attr('clickflg', 'false');
+                        $(subObject).text(str);
+                    }
                 }
 
                 if (subObject === '.rightDiggitSpan') {
                     // 鼠标移入，更新顶值
                     str = $('#digg_count').text();
-                    if ($(subObject).text() !== str) {$(parentObject).attr('clickflg', 'false'); $(subObject).text(str);}
+                    if ($(subObject).text() !== str) {
+                        $(parentObject).attr('clickflg', 'false');
+                        $(subObject).text(str);
+                    }
                 }
 
                 $(subObject).show();
             },
-            mouseout : function(){
+            mouseout: function () {
                 $(subObject).hide();
             },
             click: function () {
@@ -268,7 +288,7 @@ function Base() {
                     if ($(this).attr('clickflg') === 'false') {
                         $(this).attr('clickflg', 'true');
                         $(subObject).text('提交中..');
-                        setTimeout("$('"+subObject+"').text($('#digg_tips').text())", 1500);
+                        setTimeout("$('" + subObject + "').text($('#digg_tips').text())", 1500);
                     }
                 }
 
@@ -276,6 +296,7 @@ function Base() {
                     // 点击关注
                     if ($(this).attr('clickflg') === 'false') {
                         setTimeout(hanFollow, 1500);
+
                         function hanFollow() {
                             if ('关注成功' === $.trim($('#p_b_follow').text())) {
                                 $(parentObject).attr('clickflg', 'true');
@@ -290,7 +311,7 @@ function Base() {
                     // 点击滚动
                     var ac = $(this).attr('data');
                     if (ac === 'down') {
-                        var docHeight    = $(document).height();
+                        var docHeight = $(document).height();
                         var windowHeight = $(window).height();
                         tools.actScroll(docHeight - windowHeight, 2000)
                     } else {
@@ -298,15 +319,15 @@ function Base() {
                     }
                 }
             }
-        }) ;
+        });
     };
 
-//=================== 逻辑处理：页面公共处理
+    //=================== 逻辑处理：页面公共处理
 
     /**
      * 结束Loading页面
      */
-    this.endLoading = function() {
+    this.endLoading = function () {
         $('body').css('overflow', 'auto');
         pageLoading.spinner.setComplete();
         $('#loading').fadeOut(300);
@@ -316,7 +337,7 @@ function Base() {
     /**
      * HTML-TITLE
      */
-    this.htmlTitle = function() {
+    this.htmlTitle = function () {
         var RelTitle = document.title,
             hidden,
             visibilityChange,
@@ -362,24 +383,28 @@ function Base() {
      * 页面特效控制
      */
     this.setPageAnimationControl = function () {
-        if (window.cnblogsConfig.homeTopAnimationRendered
-            || window.cnblogsConfig.essayTopAnimationRendered
-            || window.cnblogsConfig.bgAnimationRendered
+        if (window.cnblogsConfig.homeTopAnimationRendered ||
+            window.cnblogsConfig.essayTopAnimationRendered ||
+            window.cnblogsConfig.bgAnimationRendered
         ) {
             var html = '<div id="pageAnimationOffOn" data="off" style="z-index:  999;position:  absolute;top: 15px;right: 20px;font-size: 14px;color: #f9f9f9;cursor: pointer;">';
             html += '<span id="pageAnimationOffOnIcon" class="iconfont icon-shandian" style="display: inline-block;"></span>';
-            html += '<span id="pageAnimationOffOnText">关闭页面特效</span>';
+            html += '<span id="pageAnimationOffOnText">关闭页面特效lala</span>';
             html += '</div>';
             $('body').prepend(html);
             $('#pageAnimationOffOn').click(function () {
                 if ($(this).attr('data') == 'off') {
                     $('body').find('canvas').hide();
-                    $('#pageAnimationOffOnIcon').rotate({animateTo:-360});
+                    $('#pageAnimationOffOnIcon').rotate({
+                        animateTo: -360
+                    });
                     $('#pageAnimationOffOnText').text("打开页面特效");
                     $(this).attr('data', 'on');
                 } else {
                     $('body').find('canvas').show();
-                    $('#pageAnimationOffOnIcon').rotate({animateTo:360});
+                    $('#pageAnimationOffOnIcon').rotate({
+                        animateTo: 360
+                    });
                     $('#pageAnimationOffOnText').text("关闭页面特效");
                     $(this).attr('data', 'off');
                 }
@@ -390,31 +415,31 @@ function Base() {
     /**
      * 设置菜单数据
      */
-    this.setMenuData = function() {
-        var introduceHtml      = $('#profile_block').html(),        // 个人信息
-            calendar           = $('#blog-calendar'),               // 日历
-            calendarTable      = $('#blogCalendar'),                // 日历
-            sidebarSearch      = $('#sidebar_search_box'),          // 找找看
-            scorerank          = $('#sidebar_scorerank ul li'),     // 积分与排名
-            sidebar            = $('#sidebar_recentposts ul li'),   // 最新随笔
-            toptags            = $('#sidebar_toptags ul li'),       // 我的标签
-            sbClassify         = $('#sidebar_postcategory ul li'),  // 随笔分类
-            sbRecord           = $('#sidebar_postarchive ul li'),   // 随笔档案
-            sbArticle          = $('#sidebar_articlearchive ul li'),// 文章档案
-            sbTopview          = $('#TopViewPostsBlock ul li'),     // 阅读排行
-            topDiggPosts       = $('#TopDiggPostsBlock ul li'),     // 推荐排行
-            recentComments     = $('#sidebar_recentcomments ul'),   // 最新评论
-            menuIntroduce      = $('#introduce'),
-            menuCalendar       = $('#calendar-box'),
-            menuScorerank      = $('#sb-sidebarScorerank'),
-            menuSearchBox      = $('#sb-sidebarSearchBox'),
-            menuArticle        = $('#sb-articlearchive'),
-            menuSidebar        = $('#sb-sidebarRecentposts'),
-            menuToptags        = $('#sb-toptags'),
-            menuClassify       = $('#sb-classify'),
-            menuRecord         = $('#sb-record'),
-            menuTopview        = $('#sb-topview'),
-            menuTopDiggPosts   = $('#sb-topDiggPosts'),
+    this.setMenuData = function () {
+        var introduceHtml = $('#profile_block').html(), // 个人信息
+            calendar = $('#blog-calendar'), // 日历
+            calendarTable = $('#blogCalendar'), // 日历
+            sidebarSearch = $('#sidebar_search_box'), // 找找看
+            scorerank = $('#sidebar_scorerank ul li'), // 积分与排名
+            sidebar = $('#sidebar_recentposts ul li'), // 最新随笔
+            toptags = $('#sidebar_toptags ul li'), // 我的标签
+            sbClassify = $('#sidebar_postcategory ul li'), // 随笔分类
+            sbRecord = $('#sidebar_postarchive ul li'), // 随笔档案
+            sbArticle = $('#sidebar_articlearchive ul li'), // 文章档案
+            sbTopview = $('#TopViewPostsBlock ul li'), // 阅读排行
+            topDiggPosts = $('#TopDiggPostsBlock ul li'), // 推荐排行
+            recentComments = $('#sidebar_recentcomments ul'), // 最新评论
+            menuIntroduce = $('#introduce'),
+            menuCalendar = $('#calendar-box'),
+            menuScorerank = $('#sb-sidebarScorerank'),
+            menuSearchBox = $('#sb-sidebarSearchBox'),
+            menuArticle = $('#sb-articlearchive'),
+            menuSidebar = $('#sb-sidebarRecentposts'),
+            menuToptags = $('#sb-toptags'),
+            menuClassify = $('#sb-classify'),
+            menuRecord = $('#sb-record'),
+            menuTopview = $('#sb-topview'),
+            menuTopDiggPosts = $('#sb-topDiggPosts'),
             menuRecentComments = $('#sb-recentComments');
 
         // 添加个人信息
@@ -427,7 +452,7 @@ function Base() {
 
         // 添加日历
         function setCalendar() {
-            if (calendarTable.length > 0 && menuCalendar.html() === ''){
+            if (calendarTable.length > 0 && menuCalendar.html() === '') {
                 var calendarHtml = '<div id="blog-calendar">' + calendar.html() + '</div>';
                 calendar.remove();
                 menuCalendar.html(calendarHtml);
@@ -438,7 +463,7 @@ function Base() {
 
         // 添加找找看
         function setSidebarSearch() {
-            if (sidebarSearch.length > 0 && menuSearchBox.html() === ''){
+            if (sidebarSearch.length > 0 && menuSearchBox.html() === '') {
                 menuSearchBox.html('<div id="sb_widget_my_zzk" class="div_my_zzk"><input id="q" type="text" onkeydown="return zzk_go_enter(event);" class="input_my_zzk"></div>').prev('.m-list-title').show();
                 bndongJs.clearIntervalTimeId(timeIds.setSidebarSearchTId);
             }
@@ -446,7 +471,7 @@ function Base() {
 
         // 添加积分与排名
         function setSidebarScorerank() {
-            if (scorerank.length > 0 && menuScorerank.html() === ''){
+            if (scorerank.length > 0 && menuScorerank.html() === '') {
                 menuScorerank.html(getMenuData(scorerank, 'icon-collection_fill')).prev('.m-list-title').show();
                 bndongJs.clearIntervalTimeId(timeIds.setSidebarScorerankTId);
             }
@@ -454,7 +479,7 @@ function Base() {
 
         // 添加最新随笔
         function setSidebar() {
-            if (sidebar.length > 0 && menuSidebar.html() === ''){
+            if (sidebar.length > 0 && menuSidebar.html() === '') {
                 menuSidebar.html(getMenuData(sidebar, 'icon-time_fill')).prev('.m-list-title').show();
                 bndongJs.clearIntervalTimeId(timeIds.setMenuSidebarTId);
             }
@@ -525,7 +550,7 @@ function Base() {
                     html += '<div class="m-icon-list"><div><ul>';
                     $.each(list.data, function (key, val) {
                         html += '<li><a href="' + val[1] + '">';
-                        html += '<span class="iconfont '+ list.icon +'" style="color: #888;font-size: 14px;margin-right: 5px;"></span>';
+                        html += '<span class="iconfont ' + list.icon + '" style="color: #888;font-size: 14px;margin-right: 5px;"></span>';
                         html += val[0] + '</a></li>';
                     });
                     html += '</ul></div></div>';
@@ -537,16 +562,16 @@ function Base() {
 
         function getMenuData(obj, icon) {
             var html = '<div><ul>',
-                ret  = /^[1-9]+[0-9]*$/;
+                ret = /^[1-9]+[0-9]*$/;
             obj.each(function (i) {
                 var p = $(obj[i]),
                     o = p.text() === p.html() ? {} : $(p.html()),
                     textArr = $.trim(p.text()).split('.');
-                if (ret.test(textArr[0])) textArr.splice(0,1);
+                if (ret.test(textArr[0])) textArr.splice(0, 1);
                 var text = $.trim(textArr.join('.')),
-                    iconHtml = '<span class="iconfont '+icon+'" style="color: #888;font-size: 14px;margin-right: 5px;"></span>';
+                    iconHtml = '<span class="iconfont ' + icon + '" style="color: #888;font-size: 14px;margin-right: 5px;"></span>';
                 o.length > 0 && o.html(iconHtml + text);
-                html += '<li>' + (o.length > 0 ?  o.prop("outerHTML") : "<a href='javascript:void(0);'>" + iconHtml + text + "</a>") + '</li>';
+                html += '<li>' + (o.length > 0 ? o.prop("outerHTML") : "<a href='javascript:void(0);'>" + iconHtml + text + "</a>") + '</li>';
             });
             html += '</ul></div>';
             return html;
@@ -554,33 +579,35 @@ function Base() {
 
         function getMenuCommentsData(obj, icon) {
             var html = '<div><ul>',
-                ret  = /^[1-9]+[0-9]*$/,
+                ret = /^[1-9]+[0-9]*$/,
                 title, body, author;
 
             if (obj.find('li').length > 2) {
-                title  = obj.find('li.recent_comment_title');
-                body   = obj.find('li.recent_comment_body');
+                title = obj.find('li.recent_comment_title');
+                body = obj.find('li.recent_comment_body');
                 author = obj.find('li.recent_comment_author');
 
-                if (title.length !== body.length || title.length !== author.length) return ;
+                if (title.length !== body.length || title.length !== author.length) return;
 
                 title.each(function (i) {
                     var p = $(title[i]),
                         o = p.text() === p.html() ? {} : $(p.html()),
                         textArr = $.trim(p.text()).split('.');
-                    if (ret.test(textArr[0])) textArr.splice(0,1);
+                    if (ret.test(textArr[0])) textArr.splice(0, 1);
                     var text = $.trim(textArr.join('.')),
-                        iconHtml = '<span class="iconfont '+icon+'" style="color: #888;font-size: 15px;margin-right: 5px;"></span>';
+                        iconHtml = '<span class="iconfont ' + icon + '" style="color: #888;font-size: 15px;margin-right: 5px;"></span>';
                     o.length > 0 && o.html(iconHtml + text);
-                    html += '<li>' + (o.length > 0 ?  o.prop("outerHTML") : "<a href='javascript:void(0);'>" + iconHtml + text + "</a>")
+                    html += '<li>' + (o.length > 0 ? o.prop("outerHTML") : "<a href='javascript:void(0);'>" + iconHtml + text + "</a>")
 
-                        + '<div style="padding-left: 1.5em;color: #777;position: relative;top: -5px;">'
-                        + $(body[i]).text()
-                        + '</div>'
+                        +
+                        '<div style="padding-left: 1.5em;color: #777;position: relative;top: -5px;">' +
+                        $(body[i]).text() +
+                        '</div>'
 
-                        + '<div style="text-align: right;color: #444;position: relative;top: -10px;">'
-                        + $(author[i]).text()
-                        + '</div></li>';
+                        +
+                        '<div style="text-align: right;color: #444;position: relative;top: -10px;">' +
+                        $(author[i]).text() +
+                        '</div></li>';
                 });
             }
             html += '</ul></div>';
@@ -610,7 +637,7 @@ function Base() {
     this.setMenuUserInfoImg = function () {
         if (window.cnblogsConfig.menuUserInfoBgImg) {
             $('.introduce-box').css({
-                'background': '#000 url('+window.cnblogsConfig.menuUserInfoBgImg+') center no-repeat',
+                'background': '#000 url(' + window.cnblogsConfig.menuUserInfoBgImg + ') center no-repeat',
                 'background-size': '100%'
             });
         }
@@ -619,15 +646,16 @@ function Base() {
     /**
      * 添加页脚
      */
-    this.addFooter = function() {
+    this.addFooter = function () {
         const footer = $('#footer'),
-              lHref  = 'https://github.com/'+window.cnblogsConfig.GhUserName+'/'+window.cnblogsConfig.GhRepositories+'/tree/'+window.cnblogsConfig.CnVersions,
-              rHref  = 'https://github.com/'+window.cnblogsConfig.GhUserName+'/'+window.cnblogsConfig.GhRepositories+'/tree/'+window.cnblogsConfig.GhVersions;
+            lHref = 'https://github.com/' + window.cnblogsConfig.GhUserName + '/' + window.cnblogsConfig.GhRepositories + '/tree/' + window.cnblogsConfig.CnVersions,
+            rHref = 'https://github.com/' + window.cnblogsConfig.GhUserName + '/' + window.cnblogsConfig.GhRepositories + '/tree/' + window.cnblogsConfig.GhVersions;
 
-        var pvHtml   = '', bgFooter = '';
+        var pvHtml = '',
+            bgFooter = '';
 
         if (window.cnblogsConfig.bottomText.left || window.cnblogsConfig.bottomText.right)
-            pvHtml += '<div>【'+window.cnblogsConfig.bottomText.left+'<span id="footerTextIcon">'+window.cnblogsConfig.bottomText.icon+'</span>'+window.cnblogsConfig.bottomText.right+'】</div>';
+            pvHtml += '<div>【' + window.cnblogsConfig.bottomText.left + '<span id="footerTextIcon">' + window.cnblogsConfig.bottomText.icon + '</span>' + window.cnblogsConfig.bottomText.right + '】</div>';
 
         pvHtml += "<div><span id='blogRunTimeSpan'></span><span class='my-face'>ღゝ◡╹)ノ♡</span></div>" +
             '<div id="blogrollInfo"></div>' +
@@ -647,8 +675,8 @@ function Base() {
 
         setBlogroll();
         setTheme();
-        window.setInterval( setRunTime, 500 );
-        timeIds.setCnzzTId = window.setInterval( setCnzz, 1000 );
+        window.setInterval(setRunTime, 500);
+        timeIds.setCnzzTId = window.setInterval(setCnzz, 1000);
 
         // v1.0 页脚
         function init_t1() {
@@ -709,17 +737,17 @@ function Base() {
         // 设置运行时间
         function setRunTime() {
             var runDate = tools.getRunDate(window.cnblogsConfig.blogStartDate ? window.cnblogsConfig.blogStartDate : '2019-01-01');
-            $('#blogRunTimeSpan').text('This blog has running : '+runDate.daysold+' d '+runDate.hrsold+' h '+runDate.minsold+' m '+runDate.seconds+' s');
+            $('#blogRunTimeSpan').text('This blog has running : ' + runDate.daysold + ' d ' + runDate.hrsold + ' h ' + runDate.minsold + ' m ' + runDate.seconds + ' s');
         }
 
         // 设置友情链接
         function setBlogroll() {
             if (window.cnblogsConfig.bottomBlogroll.length > 0) {
-                var blogrollArr  = window.cnblogsConfig.bottomBlogroll;
+                var blogrollArr = window.cnblogsConfig.bottomBlogroll;
                 var blogrollHtml = '友情链接：';
-                for(var i = 0; i < blogrollArr.length; i++) {
-                    blogrollHtml += '<a href="'+(blogrollArr[i][1])+'" target="_blank">'+(blogrollArr[i][0])+'</a>';
-                    if (i < blogrollArr.length-1) blogrollHtml += '<span style="margin: 0 3px;">/</span>';
+                for (var i = 0; i < blogrollArr.length; i++) {
+                    blogrollHtml += '<a href="' + (blogrollArr[i][1]) + '" target="_blank">' + (blogrollArr[i][0]) + '</a>';
+                    if (i < blogrollArr.length - 1) blogrollHtml += '<span style="margin: 0 3px;">/</span>';
                 }
                 $('#blogrollInfo').html(blogrollHtml);
             }
@@ -730,15 +758,15 @@ function Base() {
             var cnzzStat = $('.id_cnzz_stat_icon a');
             if (cnzzStat.length > 0) {
                 var cnzzInfo = [];
-                var cnzzArr  = $(cnzzStat[1]).text().split('|');
+                var cnzzArr = $(cnzzStat[1]).text().split('|');
                 $.each(cnzzArr, function (i) {
                     var str = $.trim(cnzzArr[i]);
                     if (str != '') {
-                        str = str.replace('今日','Today').replace('昨日','Yesterday').replace('[',':').replace(']','');
+                        str = str.replace('今日', 'Today').replace('昨日', 'Yesterday').replace('[', ':').replace(']', '');
                         cnzzInfo.push(str)
                     }
                 });
-                cnzzInfo.push($(cnzzStat[2]).text().replace('当前在线','Online').replace('[',':').replace(']',''));
+                cnzzInfo.push($(cnzzStat[2]).text().replace('当前在线', 'Online').replace('[', ':').replace(']', ''));
                 $('#cnzzInfo').text(cnzzInfo.join(' | '));
                 bndongJs.clearIntervalTimeId(timeIds.setCnzzTId);
             }
@@ -747,50 +775,53 @@ function Base() {
         // 设置加载主题信息
         function setTheme() {
 
-            $('#themeInfo').html('Theme version: <a href="'+lHref
-                +'" target="_blank" style="color: #888;text-decoration: underline;">'
-                +(window.cnblogsConfig.CnVersions).substring(0,7)+'</a>'
-                +' / Loading theme version: <a href="'+rHref
-                +'" target="_blank" style="color: #888;text-decoration: underline;">'
-                +(window.cnblogsConfig.GhVersions).substring(0,7)+'</a>'
+            $('#themeInfo').html('Theme version: <a href="' + lHref +
+                '" target="_blank" style="color: #888;text-decoration: underline;">' +
+                (window.cnblogsConfig.CnVersions).substring(0, 7) + '</a>' +
+                ' / Loading theme version: <a href="' + rHref +
+                '" target="_blank" style="color: #888;text-decoration: underline;">' +
+                (window.cnblogsConfig.GhVersions).substring(0, 7) + '</a>'
             );
         }
     };
 
-   
 
-//=================== 逻辑处理：主页处理
+
+    //=================== 逻辑处理：主页处理
 
     /**
      * 主页初始化
      */
-    this.homeInit = function() {
+    this.homeInit = function () {
 
         // 设置主页图片
-        let homeTopImg = window.cnblogsConfig.homeTopImg, bgImg;
+        let homeTopImg = window.cnblogsConfig.homeTopImg,
+            bgImg;
 
         homeTopImg.length > 0 ?
-            (homeTopImg.length > 1 ? bgImg = homeTopImg[tools.randomNum(0, homeTopImg.length - 1)] : bgImg = homeTopImg[0])
-            : bgImg = "";
+            (homeTopImg.length > 1 ? bgImg = homeTopImg[tools.randomNum(0, homeTopImg.length - 1)] : bgImg = homeTopImg[0]) :
+            bgImg = "";
         $('.main-header').css({
-            'background': '#222 url('+bgImg+')  center center no-repeat',
+            'background': '#222 url(' + bgImg + ')  center center no-repeat',
             'background-size': 'cover'
         });
 
         // 头图点击滚动到内容位置
         $('.scroll-down').click(function () {
             let endScroll;
-            endScroll = $('#home').offset().top + 10; tools.actScroll(endScroll, 1000);});
+            endScroll = $('#home').offset().top + 10;
+            tools.actScroll(endScroll, 1000);
+        });
 
         // 设置右下角菜单
-        timeIds.setHomeRightMenuTId = window.setInterval( bndongJs.addHomeRightMenu, 1000 );
+        timeIds.setHomeRightMenuTId = window.setInterval(bndongJs.addHomeRightMenu, 1000);
 
         bndongJs.setHitokoto();
         bndongJs.scrollMonitor();
         bndongJs.setDomHomePosition();
 
         if (window.cnblogsConfig.homeTopAnimationRendered)
-            require(['circleMagic'], function() {
+            require(['circleMagic'], function () {
                 $('.main-header').circleMagic(window.cnblogsConfig.homeTopAnimation);
             });
     };
@@ -798,7 +829,7 @@ function Base() {
     /**
      * 设置主页标语
      */
-    this.setHitokoto = function() {
+    this.setHitokoto = function () {
 
         if (window.cnblogsConfig.homeBannerText !== "") {
             $('#hitokoto').text(window.cnblogsConfig.homeBannerText).css('display', '-webkit-box');
@@ -848,7 +879,7 @@ function Base() {
                 $.ajax(settings).done(function (response) {
                     if (response.ResultCode == 1) {
                         $('#hitokoto').text(response.Body.word).css('display', '-webkit-box');
-                        $('#hitokotoAuthor').text('- '+response.Body.word_from).show();
+                        $('#hitokotoAuthor').text('- ' + response.Body.word_from).show();
                     } else {
                         var listIndex = tools.randomNum(0, topTitleList.length - 1);
                         $('#hitokoto').text(topTitleList[listIndex]).css('display', '-webkit-box');
@@ -870,7 +901,7 @@ function Base() {
                 $.ajax(settings).done(function (response) {
                     if (response && response.status === "success") {
                         $('#hitokoto').text(response.data.content).css('display', '-webkit-box');
-                        $('#hitokotoAuthor').text('《'+response.data.origin.title+'》 - '+response.data.origin.dynasty+' - '+response.data.origin.author).show();
+                        $('#hitokotoAuthor').text('《' + response.data.origin.title + '》 - ' + response.data.origin.dynasty + ' - ' + response.data.origin.author).show();
                     } else {
                         var listIndex = tools.randomNum(0, topTitleList.length - 1);
                         $('#hitokoto').text(topTitleList[listIndex]).css('display', '-webkit-box');
@@ -885,7 +916,7 @@ function Base() {
     /**
      * 添加主页右下角菜单
      */
-    this.addHomeRightMenu = function() {
+    this.addHomeRightMenu = function () {
         const rightMenu = $('#rightMenu');
         if (rightMenu.length > 0) {
 
@@ -911,12 +942,12 @@ function Base() {
         }
     };
 
-//=================== 逻辑处理：非主页处理
+    //=================== 逻辑处理：非主页处理
 
     /**
      * 非主页初始化
      */
-    this.notHomeInit = function() {
+    this.notHomeInit = function () {
 
         // 设置随笔标题
         const sbTitle = $('#cb_post_title_url').text();
@@ -925,8 +956,8 @@ function Base() {
 
         // 设置文章信息
         bndongJs.setArticleInfoAuthor();
-        timeIds.blogPostCategoryTId = window.setInterval( bndongJs.setArticleInfoClass, 1000 );
-        timeIds.entryTagTId         = window.setInterval( bndongJs.setArticleInfoTag, 1000 );
+        timeIds.blogPostCategoryTId = window.setInterval(bndongJs.setArticleInfoClass, 1000);
+        timeIds.entryTagTId = window.setInterval(bndongJs.setArticleInfoTag, 1000);
 
         // 验证是否是书单文章
         if ($('#bookListFlg').length > 0) bndongJs.setBookList();
@@ -937,7 +968,7 @@ function Base() {
         bndongJs.baguetteBox();
 
         // 设置右下角菜单
-        timeIds.setNotHomeRightMenuTId = window.setInterval( bndongJs.addNotHomeRightMenu, 1000 );
+        timeIds.setNotHomeRightMenuTId = window.setInterval(bndongJs.addNotHomeRightMenu, 1000);
 
         bndongJs.setCommentStyle();
     };
@@ -955,7 +986,7 @@ function Base() {
             author = window.cnblogsConfig.blogUser;
         }
         var str = 'Posted by ' + author + ' on ' + date;
-        $('#articleInfo').append('<p class="article-info-text">'+str+'</p>');
+        $('#articleInfo').append('<p class="article-info-text">' + str + '</p>');
     };
 
     /**
@@ -966,7 +997,7 @@ function Base() {
         if (obj.length > 0) {
             $.each(obj, function (i) {
                 var tag = $(obj[i]);
-                $('#articleInfo').append('<span class="article-info-tag article-tag-class-color">'+(tag.text())+'</span>');
+                $('#articleInfo').append('<span class="article-info-tag article-tag-class-color">' + (tag.text()) + '</span>');
             });
             bndongJs.clearIntervalTimeId(timeIds.blogPostCategoryTId);
         }
@@ -980,7 +1011,7 @@ function Base() {
         if (obj.length > 0) {
             $.each(obj, function (i) {
                 var tag = $(obj[i]);
-                $('#articleInfo').append('<span class="article-info-tag article-tag-color">'+(tag.text())+'</span>');
+                $('#articleInfo').append('<span class="article-info-tag article-tag-color">' + (tag.text()) + '</span>');
             });
             bndongJs.clearIntervalTimeId(timeIds.entryTagTId);
         }
@@ -989,7 +1020,7 @@ function Base() {
     /**
      * 初始化文章目录插件位置
      */
-    this.initCatalog = function() {
+    this.initCatalog = function () {
         const sideToolbar = $('#sideToolbar');
         if (sideToolbar.length > 0) {
             const sideToolbarTop = $('.main-header').outerHeight();
@@ -1003,19 +1034,19 @@ function Base() {
     /**
      * 设置非主页头图
      */
-    this.setNotHomeTopImg = function() {
+    this.setNotHomeTopImg = function () {
 
         var essayTopImg = window.cnblogsConfig.essayTopImg,
             bgImg;
 
         essayTopImg.length > 0 ?
-            (essayTopImg.length > 1 ? bgImg = essayTopImg[tools.randomNum(0, essayTopImg.length - 1)] : bgImg = essayTopImg[0])
-            : bgImg = "";
+            (essayTopImg.length > 1 ? bgImg = essayTopImg[tools.randomNum(0, essayTopImg.length - 1)] : bgImg = essayTopImg[0]) :
+            bgImg = "";
 
 
         $('.main-header').css({
             'height': '40vh',
-            'background': '#222 url('+bgImg+')  center center no-repeat',
+            'background': '#222 url(' + bgImg + ')  center center no-repeat',
             'background-size': 'cover'
         });
 
@@ -1025,7 +1056,7 @@ function Base() {
         $('#cb_post_title_url').addClass('post-del-title');
 
         if (window.cnblogsConfig.essayTopAnimationRendered)
-            require(['TweenMax_MyTween'], function() {
+            require(['TweenMax_MyTween'], function () {
                 $('#notHomeTopCanvas').css({
                     'margin': 'auto',
                     'width': '100%',
@@ -1035,34 +1066,34 @@ function Base() {
                     'left': '0',
                     'right': '0'
                 });
-            initCanvas('notHomeTopCanvas');
-            start();
-        });
+                initCanvas('notHomeTopCanvas');
+                start();
+            });
     };
 
     /**
      * 设置图片灯箱效果
      */
     this.baguetteBox = function () {
-        require(['baguetteBox', 'title', 'marvin', 'articleStatement'], function(baguetteBox) {
+        require(['baguetteBox', 'title', 'marvin', 'articleStatement'], function (baguetteBox) {
 
             // 设置图片点击查看
-            const cpb    = $('#cnblogs_post_body')
-                ,imgList = $('#cnblogs_post_body img');
+            const cpb = $('#cnblogs_post_body'),
+                imgList = $('#cnblogs_post_body img');
 
             if (cpb.length > 0 && imgList.length > 0) {
                 $.each(imgList, function (i) {
                     let tem = $(imgList[i]);
                     let flg = tem.attr('id');
                     if (typeof flg == 'undefined' && tem.outerWidth() > 50) {
-                        tem.wrap("<a class='lightbox' href='"+tem.attr('src')+"'></a>");
+                        tem.wrap("<a class='lightbox' href='" + tem.attr('src') + "'></a>");
                     }
                 });
                 baguetteBox.run('.lightbox');
             }
 
             // 初始化文章目录位置
-            timeIds.setCatalogTId = window.setInterval( bndongJs.initCatalog, 1000 );
+            timeIds.setCatalogTId = window.setInterval(bndongJs.initCatalog, 1000);
 
             bndongJs.scrollMonitor();
         });
@@ -1085,11 +1116,11 @@ function Base() {
                     html += '<div class="doulist-item"><div class="mod"><div class="hd"></div><div class="bd doulist-subject">' +
                         '    <div class="post"><img width="100" src="' + book.cover + '"></div>' +
                         '    <div class="title">' + book.name + '</div><div class="abstract">' +
-                        (book.formerNname ? '原名: '    + book.formerNname + '<br>' : '') +
-                        (book.author      ? '作者: '    + book.author + '<br>' : '') +
-                        (book.translator  ? '译者: '    + book.translator + '<br>' : '') +
-                        (book.press       ? '出版社: '  + book.press + '<br>' : '') +
-                        (book.year        ? '出版年: '  + book.year : '') +
+                        (book.formerNname ? '原名: ' + book.formerNname + '<br>' : '') +
+                        (book.author ? '作者: ' + book.author + '<br>' : '') +
+                        (book.translator ? '译者: ' + book.translator + '<br>' : '') +
+                        (book.press ? '出版社: ' + book.press + '<br>' : '') +
+                        (book.year ? '出版年: ' + book.year : '') +
                         '</div></div></div></div>';
                 });
             });
@@ -1102,21 +1133,24 @@ function Base() {
      * 设置代码
      */
     this.setCodeHighlighting = function () {
-        var pre       = $('.post pre'),
-            codeSpan  = $('.cnblogs_code span'),
-            hltype    = window.cnblogsConfig.essayCodeHighlightingType.toLowerCase(),
-            hltheme   = window.cnblogsConfig.essayCodeHighlighting.toLowerCase();
+        var pre = $('.post pre'),
+            codeSpan = $('.cnblogs_code span'),
+            hltype = window.cnblogsConfig.essayCodeHighlightingType.toLowerCase(),
+            hltheme = window.cnblogsConfig.essayCodeHighlighting.toLowerCase();
 
         switch (hltype) {
             case 'highlightjs':
                 setCodeBefore();
-                highlightjsCode(); break;
+                highlightjsCode();
+                break;
             case 'prettify':
                 setCodeBefore();
-                prettifyCode(); break;
+                prettifyCode();
+                break;
             case 'cnblogs':
             default:
-                cnblogsCode(); break;
+                cnblogsCode();
+                break;
         }
         setCopyBtn();
         setScrollbarStyle();
@@ -1128,7 +1162,8 @@ function Base() {
 
             require(['clipboard'], function () {
                 pre.each(function (i) {
-                    var obj = $(this), id = tools.randomString(8);
+                    var obj = $(this),
+                        id = tools.randomString(8);
                     obj.wrap('<code-box id="' + id + '" style="position: relative;display: block;"></code-box>');
                     obj.attr('code-id', id);
 
@@ -1158,22 +1193,22 @@ function Base() {
                         '    z-index: 1;' +
                         '"><i class="iconfont icon-fuzhi1"></i></button>';
 
-                    $('#'+id).prepend(html);
+                    $('#' + id).prepend(html);
                 });
 
                 $('code-box button').click(function () {
                     $(this).find('i').removeClass('icon-fuzhi1').addClass('icon-right');
-                    setTimeout("$('code-box button[code-id="+$(this).attr('code-id')+"] i').removeClass('icon-right').addClass('icon-fuzhi1')", 1500);
+                    setTimeout("$('code-box button[code-id=" + $(this).attr('code-id') + "] i').removeClass('icon-right').addClass('icon-fuzhi1')", 1500);
                 });
 
                 $('code-box').on({
-                    mouseover : function(){
+                    mouseover: function () {
                         $(this).find('button').css({
                             opacity: 1,
                             visibility: 'visible'
                         });
                     },
-                    mouseout : function(){
+                    mouseout: function () {
                         $(this).find('button').css({
                             opacity: 0,
                             visibility: 'hidden'
@@ -1196,9 +1231,9 @@ function Base() {
 
         // 使用 highlightjs 代码样式
         function highlightjsCode() {
-            tools.dynamicLoadingCss('https://cdn.jsdelivr.net/gh/BNDong/'+(window.cnblogsConfig.GhRepositories)+'@'+(window.cnblogsConfig.GhVersions)+'/src/style/highlightjs/'+hltheme+'.min.css');
-            require(['highlightjs'], function() {
-                $('.post pre').each(function(i, block) {
+            tools.dynamicLoadingCss('https://cdn.jsdelivr.net/gh/BNDong/' + (window.cnblogsConfig.GhRepositories) + '@' + (window.cnblogsConfig.GhVersions) + '/src/style/highlightjs/' + hltheme + '.min.css');
+            require(['highlightjs'], function () {
+                $('.post pre').each(function (i, block) {
                     if ($.inArray(hltheme, [
                             'github-gist', 'googlecode', 'grayscale',
                             'idea', 'isbl-editor-light', 'qtcreator_light',
@@ -1215,18 +1250,25 @@ function Base() {
             pre.addClass('prettyprint');
             switch (hltheme) {
                 case 'prettify':
-                    require(['codePrettify'], function() {
+                    require(['codePrettify'], function () {
                         $('pre').css('background-color', '#f6f8fa').css('border', '0');
-                    }); break;
+                    });
+                    break;
                 case 'desert':
-                    require(['codeDesert']); break;
+                    require(['codeDesert']);
+                    break;
                 case 'sunburst':
-                    require(['codeSunburst']); break;
+                    require(['codeSunburst']);
+                    break;
                 case 'obsidian':
-                    require(['codeObsidian']); break;
+                    require(['codeObsidian']);
+                    break;
                 case 'doxy':
-                    require(['codeDoxy']); break;
-                default: cnblogsCode(); break;
+                    require(['codeDoxy']);
+                    break;
+                default:
+                    cnblogsCode();
+                    break;
             }
         }
 
@@ -1242,62 +1284,65 @@ function Base() {
         // 设置代码滚动条样式
         function setScrollbarStyle() {
             tools.dynamicLoadingCss(getJsDelivrUrl('jquery.mCustomScrollbar.css'));
-            var scrollbarTimeId = window.setInterval( function () {
+            var scrollbarTimeId = window.setInterval(function () {
                 if ($('.post pre span').length > 0) {
                     $('.post pre').mCustomScrollbar({
-                        theme:"minimal-dark",
-                        axis:"yx"
+                        theme: "minimal-dark",
+                        axis: "yx"
                     });
                     var color;
                     switch (hltype) {
                         case 'highlightjs':
                             color = $('.hljs-comment').css('color');
-                            $('.mCSB_dragger_bar').css('background-color', color); break;
+                            $('.mCSB_dragger_bar').css('background-color', color);
+                            break;
                         case 'prettify':
                             color = $('.com').css('color');
-                            $('.mCSB_dragger_bar').css('background-color', color); break;
+                            $('.mCSB_dragger_bar').css('background-color', color);
+                            break;
                         case 'cnblogs':
-                            color = "rgb(153, 153, 153)"; break;
+                            color = "rgb(153, 153, 153)";
+                            break;
                     }
                     $('code-box button').css('color', color);
                     bndongJs.clearIntervalTimeId(scrollbarTimeId);
                 }
-            }, 500 );
+            }, 500);
         }
     };
 
     /**
      * 设置评论框样式
      */
-    this.setCommentStyle = function() {
+    this.setCommentStyle = function () {
 
-        var commentList        = $('.blog_comment_body'),
+        var commentList = $('.blog_comment_body'),
             commentPlaceholder = $('#blog-comments-placeholder');
 
         commentAvatar(commentList);
         commentList.addClass('hvr-bob');
 
         //气泡效果
-        timeIds.commentTId = window.setInterval(function(){
-                if (commentPlaceholder.html() != '' || $("#comments_pager_bottom").length > 0) {
-                    CommentBubble();
-                    bndongJs.clearIntervalTimeId(timeIds.commentTId);
-                }
-            },1000);
+        timeIds.commentTId = window.setInterval(function () {
+            if (commentPlaceholder.html() != '' || $("#comments_pager_bottom").length > 0) {
+                CommentBubble();
+                bndongJs.clearIntervalTimeId(timeIds.commentTId);
+            }
+        }, 1000);
 
         function commentAvatar(commentList) {
             commentList.each(function (i) {
-                var p    = $(commentList[i]).attr('id').split('_'),
+                var p = $(commentList[i]).attr('id').split('_'),
                     html = '';
                 if (p.length > 0) {
                     var idIndex = p.length - 1;
                     var id = p[idIndex];
                     var idTmp = id.toString().match(/[0-9]/g);
                     if ($.isArray(idTmp)) id = idTmp.join('');
-                    var op = $('#comment_'+id+'_avatar');
+                    var op = $('#comment_' + id + '_avatar');
                     if (op.length > 0 && op.text() != '') {
                         var patch = op.text();
-                        html += '<img class="comment-avatar" src="'+patch+'"/>';
+                        html += '<img class="comment-avatar" src="' + patch + '"/>';
                     } else {
                         html += '<img class="comment-avatar" src="https://gitee.com/dbnuo/Cnblogs-Theme-SimpleMemory/raw/master/img/default_avatar.jpeg"/>';
                     }
@@ -1324,7 +1369,7 @@ function Base() {
                 '</table> ' +
                 '</div>';
 
-            $.each($(".blog_comment_body"), function(i, t) {
+            $.each($(".blog_comment_body"), function (i, t) {
                 $(t).html(w1 + $(t).html() + w2);
             });
             $(".louzhu").closest(".feedbackItem").find(".out").removeClass("out").addClass("inc");
@@ -1334,7 +1379,7 @@ function Base() {
     /**
      * 添加非主页右下角菜单
      */
-    this.addNotHomeRightMenu = function() {
+    this.addNotHomeRightMenu = function () {
         var rightMenu = $('#rightMenu');
         if (rightMenu.length > 0 && $('#div_digg').length > 0) {
 
