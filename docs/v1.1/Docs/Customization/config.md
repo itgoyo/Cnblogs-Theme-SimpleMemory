@@ -496,7 +496,7 @@ window.cnblogsConfig = {
 
 ```json
 [
-    "https://cdn.jsdelivr.net/gh/itgoyo/PicGoRes@master/img/bz.jpg.jpg"
+    "https://cdn.jsdelivr.net/gh/itgoyo/PicGoRes@master/img/bz.jpg"
 ]
 ```
 
@@ -505,8 +505,8 @@ window.cnblogsConfig = {
 ```javascript
 window.cnblogsConfig = {
     homeTopImg: [
-        "https://cdn.jsdelivr.net/gh/itgoyo/PicGoRes@master/img/bz.jpg.jpg",
-        "https://cdn.jsdelivr.net/gh/itgoyo/PicGoRes@master/img/bz.jpg.jpg"
+        "https://cdn.jsdelivr.net/gh/itgoyo/PicGoRes@master/img/bz.jpg",
+        "https://cdn.jsdelivr.net/gh/itgoyo/PicGoRes@master/img/bz.jpg"
     ]
 }
 ```
